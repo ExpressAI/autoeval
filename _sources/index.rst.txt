@@ -1,16 +1,31 @@
-.. AutoEval documentation master file, created by
-   sphinx-quickstart on Thu Nov  4 09:40:59 2021.
+.. Evaluation as a Service API documentation master file, created by
+   sphinx-quickstart on Sat Sep  4 09:55:46 2021.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to AutoEval's documentation!
-====================================
+Welcome to EaaS API's documentation!
+=======================================================
 
+EaaS stands for "Evaluation as a Service." It is an open-source framework for facilitating evaluations for various NLP tasks. It offers a wide variety of functionalities, including
+
+* Basic scoring functionality for system outputs.
+* Fine-grained evaluation
+* To be continued
+
+Content
+=======================================================
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-   includeme
+   installation
+   metrics
+   analysis
+   library
+
+
+
+
+
 
 Indices and tables
 ==================

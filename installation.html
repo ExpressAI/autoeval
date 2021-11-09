@@ -189,9 +189,29 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">eaas</span>
 </pre></div>
 </div>
-<p>To use the API, run the following as a simple example:</p>
+<p>To use the API, You should go through the following two steps:
+* <strong>Step 1</strong>: You should load the default configurations and make modifications based on your own needs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eaas</span> <span class="k">import</span> <span class="n">Config</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+<span class="c1"># To see the metrics we support, run</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">metrics</span><span class="p">())</span>
+<span class="c1"># dict_keys(['bart_score_summ', 'bart_score_mt', 'bert_score', 'bleu', 'chrf', 'comet', 'comet_qe', 'mover_score', 'prism', 'prism_qe', 'rouge1', 'rouge2', 'rougeL'])</span>
+
+<span class="c1"># To see the default configuration of a metric, run</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">bleu</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="c1"># {'smooth_method': 'exp', 'smooth_value': None, 'force': False, 'lowercase': False, 'use_effective_order': False}</span>
+
+<span class="c1"># To modify the config, run</span>
+<span class="n">config</span><span class="o">.</span><span class="n">bleu</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">"smooth_method"</span><span class="p">,</span> <span class="s2">"floor"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">bleu</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+<span class="c1"># {'smooth_method': 'floor', 'smooth_value': None, 'force': False, 'lowercase': False, 'use_effective_order': False}</span>
+</pre></div>
+</div>
+<ul>
+<li><p><strong>Step 2</strong>: Initialize the client and send your inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eaas</span> <span class="k">import</span> <span class="n">Client</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+<span class="n">client</span><span class="o">.</span><span class="n">load_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>  <span class="c1"># The config you have created above</span>
 
 <span class="c1"># To use this API for scoring, you need to format your input as list of dictionary.</span>
 <span class="c1"># Each dictionary consists of `source` (string, optional), `references` (list of string, optional)</span>
@@ -205,16 +225,39 @@
            <span class="s2">"hypothesis"</span><span class="p">:</span> <span class="s2">"This is the generated hypothesis."</span><span class="p">}]</span>
 <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"bleu"</span><span class="p">,</span> <span class="s2">"chrf"</span><span class="p">]</span> <span class="c1"># Can be None for simplicity if you consider using all metrics</span>
 
-<span class="n">score_dic</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="p">)</span>
-<span class="c1"># `inputs` is a list of Dict, `metrics` is metric list, `lang` is the two-letter code for language</span>
+<span class="n">score_dic</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">task</span><span class="o">=</span><span class="s2">"sum"</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span> <span class="n">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="p">)</span>
+<span class="c1"># inputs is a list of Dict, task is the name of task, metrics is metric list, lang is the two-letter code language</span>
 </pre></div>
 </div>
+</li>
+</ul>
 <p>The output is like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s1">'bleu'</span><span class="p">:</span> <span class="p">[</span><span class="mf">32.46679154750991</span><span class="p">],</span>  <span class="c1"># Sample-level scores. A list of scores one for each sample.</span>
-  <span class="s1">'corpus_bleu'</span><span class="p">:</span> <span class="mf">32.46679154750991</span><span class="p">,</span> <span class="c1"># Corpus-level score.</span>
-  <span class="s1">'chrf'</span><span class="p">:</span> <span class="p">[</span><span class="mf">38.56890099861521</span><span class="p">],</span>
-  <span class="s1">'corpus_chrf'</span><span class="p">:</span> <span class="mf">38.56890099861521</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample_level is a list of dict, corpus_level is a dict</span>
+<span class="p">{</span>
+    <span class="s1">'sample_level'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">'bleu'</span><span class="p">:</span> <span class="mf">32.46679154750991</span><span class="p">,</span>
+         <span class="s1">'attr_compression'</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>
+         <span class="s1">'attr_copy_len'</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+         <span class="s1">'attr_coverage'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+         <span class="s1">'attr_density'</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+         <span class="s1">'attr_hypothesis_len'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+         <span class="s1">'attr_novelty'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+         <span class="s1">'attr_repetition'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+         <span class="s1">'attr_source_len'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+         <span class="s1">'chrf'</span><span class="p">:</span> <span class="mf">38.56890099861521</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s1">'corpus_level'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'corpus_bleu'</span><span class="p">:</span> <span class="mf">32.46679154750991</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_compression'</span><span class="p">:</span> <span class="mf">1.2</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_copy_len'</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_coverage'</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_density'</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_hypothesis_len'</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_novelty'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_repetition'</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s1">'corpus_attr_source_len'</span><span class="p">:</span> <span class="mf">6.0</span><span class="p">,</span>
+        <span class="s1">'corpus_chrf'</span><span class="p">:</span> <span class="mf">38.56890099861521</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

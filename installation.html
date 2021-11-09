@@ -189,8 +189,9 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">eaas</span>
 </pre></div>
 </div>
-<p>To use the API, You should go through the following two steps:
-* <strong>Step 1</strong>: You should load the default configurations and make modifications based on your own needs:</p>
+<p>To use the API, You should go through the following two steps:</p>
+<ul>
+<li><p><strong>Step 1</strong>: You should load the default configurations and make modifications based on your own needs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eaas</span> <span class="k">import</span> <span class="n">Config</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
 <span class="c1"># To see the metrics we support, run</span>
@@ -207,7 +208,7 @@
 <span class="c1"># {'smooth_method': 'floor', 'smooth_value': None, 'force': False, 'lowercase': False, 'use_effective_order': False}</span>
 </pre></div>
 </div>
-<ul>
+</li>
 <li><p><strong>Step 2</strong>: Initialize the client and send your inputs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">eaas</span> <span class="k">import</span> <span class="n">Client</span>
 <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>

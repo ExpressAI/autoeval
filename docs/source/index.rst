@@ -8,9 +8,10 @@ Welcome to EaaS API's documentation!
 
 EaaS stands for "Evaluation as a Service." It is an open-source framework for facilitating evaluations for various NLP tasks. It offers a wide variety of functionalities, including
 
-* Basic scoring functionality for system outputs.
-* Fine-grained evaluation
-* To be continued
+* Scoring system outputs against gold references using various metrics.
+* Attributes calculation for characterizing data bias and system bias.
+* Fine-grained analysis for system performance along different attributes.
+* To be continued ...
 
 Content
 =======================================================

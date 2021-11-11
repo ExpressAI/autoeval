@@ -6,6 +6,7 @@ https://www.science.co.il/language/Codes.php
 
 * "bart_score_summ"
 * "bart_score_mt"
+* "bart_score_cnn_hypo_ref"
 * "bert_score"
 * "bleu"
 * "chrf"

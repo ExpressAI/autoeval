@@ -20,8 +20,9 @@ Content
 
    installation
    metrics
-   analysis
-   library
+   attributes
+   common_metrics
+   prompt
 
 
 

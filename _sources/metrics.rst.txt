@@ -2,7 +2,7 @@
 Supported Metrics
 =====================
 
-The two-letter code or three-letter code for each language can be found here: https://www.science.co.il/language/Codes.php
+The two-letter code or three-letter code for each language can be found here: https://www.science.co.il/language/Codes.php. We support the following metrics:
 
 
 * :code:`bart_score_cnn_hypo_ref`: [BARTScore](https://arxiv.org/abs/2106.11520) is a sequence to sequence framework based on pre-trained language model BART. :code:`bart_score_cnn_hypo_ref` uses the CNNDM finetuned BART. It calculates the average generation score of :code:`Score(hypothesis|reference)` and :code:`Score(reference|hypothesis)`.

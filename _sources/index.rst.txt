@@ -10,7 +10,6 @@ EaaS stands for "Evaluation as a Service." It is an open-source framework for fa
 
 * Scoring system outputs against gold references using various metrics.
 * Attributes calculation for characterizing data bias and system bias.
-* Fine-grained analysis for system performance along different attributes.
 * To be continued ...
 
 Content

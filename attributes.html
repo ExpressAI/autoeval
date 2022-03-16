@@ -186,14 +186,16 @@
         </div>
         <div class="section" id="supported-attributes">
 <h1>Supported Attributes<a class="headerlink" href="#supported-attributes" title="Permalink to this headline">¶</a></h1>
-<p>The <code class="code docutils literal notranslate"><span class="pre">task</span></code> option in the <code class="code docutils literal notranslate"><span class="pre">client.score()</span></code> function decides what attributes we calculate. Currently, we only support attributes for summarization task (<code class="code docutils literal notranslate"><span class="pre">task=sum</span></code>). The following attributes (reference: <a class="reference external" href="https://arxiv.org/pdf/2010.05139.pdf">this paper</a>) will be calculated if <code class="code docutils literal notranslate"><span class="pre">cal_attributes</span></code> is set to <cite>True</cite> in <cite>client.score()</cite>. They are all reference-free.
-* <code class="code docutils literal notranslate"><span class="pre">source_len</span></code>: measures the length of the source text.
-* <code class="code docutils literal notranslate"><span class="pre">hypothesis_len</span></code>: measures the length of the hypothesis text.
-* <code class="code docutils literal notranslate"><span class="pre">density</span> <span class="pre">&amp;</span> <span class="pre">coverage</span></code>: measures to what extent a summary covers the content in the source text.
-* <code class="code docutils literal notranslate"><span class="pre">compression</span></code>: measures the compression ratio from the source text to the generated summary.
-* <code class="code docutils literal notranslate"><span class="pre">repetition</span></code>: measures the rate of repeated segments in summaries. The segments are instantiated as trigrams.
-* <code class="code docutils literal notranslate"><span class="pre">novelty</span></code>: measures the proportion of segments in the summaries that haven’t appeared in source documents. The segments are instantiated as bigrams.
-* <code class="code docutils literal notranslate"><span class="pre">copy_len</span></code>: measures the average length of segments in summary copied from source document.</p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">task</span></code> option in the <code class="code docutils literal notranslate"><span class="pre">client.score()</span></code> function decides what attributes we calculate. Currently, we only support attributes for summarization task (<code class="code docutils literal notranslate"><span class="pre">task=sum</span></code>). The following attributes (reference: <a class="reference external" href="https://arxiv.org/pdf/2010.05139.pdf">this paper</a>) will be calculated if <code class="code docutils literal notranslate"><span class="pre">cal_attributes</span></code> is set to <code class="code docutils literal notranslate"><span class="pre">True</span></code> in <code class="code docutils literal notranslate"><span class="pre">client.score()</span></code>. They are all reference-free.</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">source_len</span></code>: measures the length of the source text.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">hypothesis_len</span></code>: measures the length of the hypothesis text.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">density</span> <span class="pre">&amp;</span> <span class="pre">coverage</span></code>: measures to what extent a summary covers the content in the source text.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">compression</span></code>: measures the compression ratio from the source text to the generated summary.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">repetition</span></code>: measures the rate of repeated segments in summaries. The segments are instantiated as trigrams.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">novelty</span></code>: measures the proportion of segments in the summaries that haven’t appeared in source documents. The segments are instantiated as bigrams.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">copy_len</span></code>: measures the average length of segments in summary copied from source document.</p></li>
+</ul>
 </div>
 
       </article>
